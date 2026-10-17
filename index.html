@@ -392,14 +392,10 @@
     }
   </style>
 </head>
-
 <body>
-  <aside class="sidebar" id="sidebar">
-    <button class="menu-toggle" id="menuToggle"
-      aria-label="Collapse navigation" aria-expanded="true">
-      <span></span><span></span><span></span>
-    </button>
 
+  <!-- 1. The Sidebar (DO NOT put the button in here) -->
+  <aside class="sidebar" id="sidebar">
     <div class="brand">
       <div class="brand-name">Muhammad Usama</div>
       <div class="brand-role">PhD Student in Mathematics<br>Tulane University</div>
@@ -420,8 +416,14 @@
     <div class="side-note">
       Mathematics<br>New Orleans, Louisiana
     </div>
-  </aside>
+  </aside> <!-- Sidebar ends here -->
 
+  <!-- 2. PUT THE BUTTON HERE instead (Outside the aside element) -->
+  <button class="menu-toggle" id="menuToggle" aria-label="Collapse navigation" aria-expanded="true">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- 3. The Main Content Panel -->
   <div class="main">
     <header class="hero">
       <div class="hero-content">
