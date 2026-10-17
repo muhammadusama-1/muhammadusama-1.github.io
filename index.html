@@ -4,716 +4,812 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Muhammad Usama, PhD student in Mathematics at Tulane University. Research interests include number theory, algebra, elliptic curves, and computational mathematics.">
+  <meta name="theme-color" content="#173b35">
+  <meta name="description" content="Muhammad Usama, Mathematics PhD student at Tulane University.">
   <title>Muhammad Usama | Mathematics</title>
 
   <style>
     :root {
-      --green: #164c3a;
-      --green-light: #28664e;
-      --cream: #f7f5ee;
+      --forest: #173b35;
+      --forest-light: #28584b;
+      --cream: #fbfaf6;
       --paper: #fffefa;
-      --gold: #c49b55;
-      --ink: #252d28;
-      --muted: #69736b;
-      --line: #e5e5da;
+      --sage: #e8eee5;
+      --gold: #c7a66a;
+      --ink: #24332e;
+      --muted: #6b766f;
+      --line: #e4e7df;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; }
 
     html {
       scroll-behavior: smooth;
-      scroll-padding-top: 85px;
+      scroll-padding-top: 30px;
     }
 
     body {
+      margin: 0;
       background: var(--cream);
       color: var(--ink);
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: Arial, Helvetica, sans-serif;
       line-height: 1.75;
     }
 
-    a {
-      color: var(--green-light);
-      text-decoration: none;
-    }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a { color: var(--forest-light); }
 
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 10;
+    .sidebar {
+      position: fixed;
+      inset: 0 auto 0 0;
+      z-index: 20;
+      width: 235px;
+      padding: 22px 15px;
+      background: var(--forest);
+      color: white;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 15px 7%;
-      background: var(--paper);
-      border-bottom: 1px solid var(--line);
+      flex-direction: column;
+      transition: transform .25s ease;
     }
 
-    .brand {
-      color: var(--green);
-      font-size: 1.15rem;
-      font-weight: bold;
-      letter-spacing: .3px;
-    }
-
-    .menu-button {
-      display: none;
-      background: none;
+    .menu-toggle {
+      display: grid;
+      place-content: center;
+      gap: 6px;
+      width: 44px;
+      height: 44px;
+      margin-bottom: 25px;
       border: 0;
-      color: var(--green);
-      font-size: 1.8rem;
+      border-radius: 8px;
+      background: transparent;
       cursor: pointer;
     }
 
-    nav {
+    .menu-toggle:hover { background: #ffffff16; }
+
+    .menu-toggle span {
+      display: block;
+      width: 27px;
+      height: 2px;
+      border-radius: 2px;
+      background: white;
+      transition: transform .2s, opacity .2s;
+    }
+
+    .menu-toggle[aria-expanded="true"] span:first-child {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle[aria-expanded="true"] span:last-child {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .brand {
+      padding: 0 11px 24px;
+      border-bottom: 1px solid #ffffff26;
+      margin-bottom: 18px;
+    }
+
+    .brand-name {
+      font-family: Georgia, serif;
+      font-size: 21px;
+      line-height: 1.35;
+    }
+
+    .brand-role {
+      margin-top: 8px;
+      color: #c7d8ce;
+      font-size: 12px;
+    }
+
+    .nav {
+      display: grid;
+      gap: 5px;
+    }
+
+    .nav button {
       display: flex;
       align-items: center;
-      gap: 22px;
+      width: 100%;
+      padding: 11px 12px;
+      border: 0;
+      border-radius: 7px;
+      background: transparent;
+      color: #e7eee8;
+      text-align: left;
+      font-size: 14px;
+      cursor: pointer;
     }
 
-    nav a {
-      color: var(--ink);
-      font-family: Arial, sans-serif;
-      font-size: .87rem;
+    .nav button:hover,
+    .nav button.active {
+      background: #ffffff20;
+      color: white;
     }
 
-    nav a:hover {
-      color: var(--green-light);
+    .side-note {
+      margin-top: auto;
+      padding: 15px 10px 5px;
+      color: #bdcec4;
+      font-size: 12px;
+    }
+
+    .main {
+      margin-left: 235px;
+      min-height: 100vh;
+      transition: margin-left .25s ease;
+    }
+
+    body.menu-collapsed .sidebar {
+      transform: translateX(-100%);
+    }
+
+    body.menu-collapsed .main {
+      margin-left: 0;
     }
 
     .hero {
       display: grid;
       grid-template-columns: 1.05fr .95fr;
       min-height: 440px;
-      background: var(--green);
+      background: var(--forest);
       color: white;
     }
 
-    .hero-text {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 65px 9% 65px 13%;
+    .hero-content {
+      align-self: center;
+      padding: 48px clamp(25px, 5vw, 65px);
     }
 
     .eyebrow {
-      margin-bottom: 14px;
-      color: #e4c98d;
-      font-family: Arial, sans-serif;
-      font-size: .78rem;
+      color: #e0c68f;
+      font-size: 11px;
       font-weight: bold;
       letter-spacing: 2px;
       text-transform: uppercase;
     }
 
     h1 {
-      margin-bottom: 20px;
-      font-size: clamp(2.6rem, 5vw, 4.3rem);
+      margin: 15px 0 18px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(38px, 4vw, 59px);
       font-weight: normal;
-      line-height: 1.1;
+      line-height: 1.12;
     }
 
-    .hero p {
-      max-width: 570px;
-      color: #e8eee8;
-      font-size: 1.08rem;
+    .hero-intro {
+      max-width: 510px;
+      color: #e0e9e2;
+      font-size: 16px;
     }
 
     .hero-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 27px;
+      gap: 10px 20px;
+      margin-top: 24px;
+      font-size: 13px;
     }
 
-    .button {
-      display: inline-block;
-      padding: 10px 18px;
-      border: 1px solid #e2c68b;
-      border-radius: 3px;
+    .hero-links a {
       color: white;
-      font-family: Arial, sans-serif;
-      font-size: .9rem;
+      text-decoration: none;
+      border-bottom: 1px solid #ffffff70;
     }
 
-    .button:hover {
-      background: rgba(255,255,255,.1);
-      text-decoration: none;
-    }
+    .hero-links a:hover { border-color: white; }
 
     .hero-image {
-      min-height: 340px;
-      background:
-        linear-gradient(90deg, rgba(22,76,58,.1), rgba(22,76,58,0)),
-        url("images/tulane-campus.jpg") center / cover no-repeat;
+      min-height: 360px;
+      background: #dbe4d9;
+      overflow: hidden;
     }
 
-    main {
+    .hero-image img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 440px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .content {
       max-width: 1050px;
       margin: 0 auto;
-      padding: 25px 30px 70px;
+      padding: 35px clamp(22px, 5vw, 60px) 65px;
     }
 
-    section {
-      padding: 55px 0;
-      border-bottom: 1px solid var(--line);
+    .page { display: none; }
+    .page.active { display: block; animation: appear .22s ease; }
+
+    @keyframes appear {
+      from { opacity: .4; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .section-label {
-      margin-bottom: 8px;
-      color: var(--green-light);
-      font-family: Arial, sans-serif;
-      font-size: .76rem;
+      color: var(--forest-light);
+      font-size: 11px;
       font-weight: bold;
       letter-spacing: 1.8px;
       text-transform: uppercase;
     }
 
     h2 {
-      margin-bottom: 22px;
-      color: var(--green);
-      font-size: 2rem;
+      margin: 7px 0 22px;
+      color: var(--forest);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 32px;
       font-weight: normal;
       line-height: 1.3;
     }
 
     h3 {
-      margin-bottom: 5px;
-      color: var(--green);
-      font-size: 1.2rem;
+      margin: 0 0 5px;
+      color: var(--forest);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 20px;
+      font-weight: normal;
     }
 
-    p + p {
-      margin-top: 13px;
+    p { margin: 0 0 15px; }
+
+    .lead {
+      max-width: 780px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 18px;
+      line-height: 1.85;
     }
 
-    .intro {
-      max-width: 800px;
-      font-size: 1.08rem;
-    }
+    .section-heading { margin-top: 35px; }
 
     .cards {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      margin-top: 24px;
+      gap: 16px;
+      margin-top: 25px;
     }
 
     .card {
       padding: 22px;
-      background: var(--paper);
       border: 1px solid var(--line);
-      border-radius: 5px;
+      border-radius: 8px;
+      background: var(--paper);
     }
 
     .card p {
+      margin: 8px 0 0;
       color: var(--muted);
-      font-size: .96rem;
+      font-size: 14px;
     }
 
     .date {
-      display: inline-block;
+      display: block;
       margin-bottom: 8px;
-      color: #8b6a30;
-      font-family: Arial, sans-serif;
-      font-size: .82rem;
+      color: #8b6d36;
+      font-size: 12px;
       font-weight: bold;
+      letter-spacing: .4px;
     }
 
     .entry {
-      margin: 25px 0;
+      margin: 27px 0;
       padding-left: 20px;
-      border-left: 2px solid #d6c59f;
+      border-left: 2px solid #cbb786;
     }
 
-    .entry p {
-      margin-top: 5px;
-    }
-
-    .details {
+    .meta {
+      margin: 3px 0 10px;
       color: var(--muted);
-      font-family: Arial, sans-serif;
-      font-size: .9rem;
-    }
-
-    ul {
-      padding-left: 22px;
-    }
-
-    li {
-      margin: 7px 0;
+      font-size: 13px;
     }
 
     .tags {
       display: flex;
       flex-wrap: wrap;
       gap: 9px;
-      margin-top: 18px;
+      margin: 20px 0 25px;
     }
 
     .tag {
-      padding: 5px 12px;
-      border: 1px solid #d8dfd4;
-      border-radius: 20px;
-      background: #eef1e8;
-      color: var(--green);
-      font-family: Arial, sans-serif;
-      font-size: .85rem;
+      padding: 5px 11px;
+      border: 1px solid #dbe2d7;
+      border-radius: 30px;
+      background: var(--sage);
+      color: var(--forest);
+      font-size: 12px;
     }
 
     .contact-box {
-      padding: 26px;
-      background: #eeefe5;
-      border-radius: 5px;
-    }
-
-    footer {
       padding: 25px;
-      background: var(--green);
-      color: #e8eee8;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+    }
+
+    .contact-box p { margin-bottom: 12px; }
+
+    .footer {
+      padding: 23px;
+      background: #edf0e8;
+      color: var(--muted);
       text-align: center;
-      font-family: Arial, sans-serif;
-      font-size: .85rem;
+      font-size: 12px;
     }
 
-    footer a {
-      color: white;
-    }
-
-    @media (max-width: 760px) {
-      .topbar {
-        padding: 13px 5%;
+    @media (max-width: 850px) {
+      .sidebar {
+        width: 235px;
+        box-shadow: 8px 0 30px #00000012;
       }
 
-      .menu-button {
-        display: block;
+      .main { margin-left: 0; }
+
+      body:not(.menu-collapsed) .main::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 10;
+        background: #17251e55;
+        pointer-events: none;
       }
 
-      nav {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        display: none;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-        padding: 8px 5% 15px;
-        background: var(--paper);
-        border-bottom: 1px solid var(--line);
-      }
-
-      nav.open {
-        display: flex;
-      }
-
-      nav a {
-        padding: 10px 0;
+      body.menu-collapsed .sidebar {
+        transform: translateX(-100%);
       }
 
       .hero {
         grid-template-columns: 1fr;
       }
 
-      .hero-text {
-        padding: 55px 7%;
+      .hero-content {
+        padding: 43px 27px;
       }
 
-      .hero-image {
-        min-height: 260px;
+      .hero-image { min-height: 270px; }
+
+      .hero-image img {
+        min-height: 270px;
+        max-height: 340px;
       }
 
-      main {
-        padding-right: 6%;
-        padding-left: 6%;
-      }
+      .cards { grid-template-columns: 1fr; }
 
-      .cards {
-        grid-template-columns: 1fr;
-      }
+      h1 { font-size: 44px; }
+    }
 
-      section {
-        padding: 42px 0;
-      }
+    @media (min-width: 851px) {
+      body.menu-collapsed .sidebar { transform: translateX(-100%); }
     }
   </style>
 </head>
 
 <body>
+  <aside class="sidebar" id="sidebar">
+    <button class="menu-toggle" id="menuToggle"
+      aria-label="Collapse navigation" aria-expanded="true">
+      <span></span><span></span><span></span>
+    </button>
 
-  <header class="topbar">
-    <a class="brand" href="#home">Muhammad Usama</a>
-
-    <button
-      class="menu-button"
-      id="menuButton"
-      aria-label="Open navigation menu"
-      aria-expanded="false"
-      aria-controls="navigation"
-    >☰</button>
-
-    <nav id="navigation">
-      <a href="#home">Home</a>
-      <a href="#updates">Latest Updates</a>
-      <a href="#about">About</a>
-      <a href="#research">Research</a>
-      <a href="#education">Education</a>
-      <a href="#teaching">Teaching</a>
-      <a href="#experience">Experience</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-
-  <div class="hero" id="home">
-    <div class="hero-text">
-      <div class="eyebrow">Mathematics · Tulane University</div>
-      <h1>Muhammad<br>Usama</h1>
-      <p>
-        PhD student in Mathematics at Tulane University.
-        My interests lie in algebra, number theory, and
-        computational approaches to mathematical problems.
-      </p>
-      <div class="hero-links">
-        <a class="button" href="#research">Research interests</a>
-        <a class="button" href="#contact">Get in touch</a>
-      </div>
+    <div class="brand">
+      <div class="brand-name">Muhammad Usama</div>
+      <div class="brand-role">PhD Student in Mathematics<br>Tulane University</div>
     </div>
 
-    <div class="hero-image" role="img"
-      aria-label="Tulane University campus"></div>
-  </div>
+    <nav class="nav" aria-label="Main navigation">
+      <button class="active" data-page="home">⌂ &nbsp; Home</button>
+      <button data-page="updates">✦ &nbsp; Latest Updates</button>
+      <button data-page="about">◎ &nbsp; About Me</button>
+      <button data-page="research">∑ &nbsp; Research</button>
+      <button data-page="education">▤ &nbsp; Education</button>
+      <button data-page="teaching">✎ &nbsp; Teaching</button>
+      <button data-page="experience">◇ &nbsp; Activities & Awards</button>
+      <button data-page="contact">✉ &nbsp; Contact</button>
+    </nav>
 
-  <main>
+    <div class="side-note">
+      Mathematics<br>New Orleans, Louisiana
+    </div>
+  </aside>
 
-    <section id="updates">
-      <div class="section-label">News and milestones</div>
-      <h2>Latest Updates</h2>
-      <p class="intro">
-        A few recent milestones in my academic journey.
-      </p>
+  <div class="main">
+    <header class="hero">
+      <div class="hero-content">
+        <div class="eyebrow">Mathematics · Tulane University</div>
+        <h1>Muhammad<br>Usama</h1>
+        <p class="hero-intro">
+          PhD student in Mathematics interested in number theory,
+          algebra, and computational mathematics. I enjoy exploring
+          the connections between abstract mathematical ideas
+          and algorithms.
+        </p>
+        <div class="hero-links">
+          <a href="mailto:musama1@tulane.edu">musama1@tulane.edu</a>
+          <a href="https://github.com/Usama314"
+             target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.youtube.com/@puremathswithusama19"
+             target="_blank" rel="noopener">YouTube</a>
+        </div>
+      </div>
 
-      <div class="cards">
-        <article class="card">
-          <span class="date">17 August 2026</span>
-          <h3>Started my PhD at Tulane</h3>
+      <div class="hero-image">
+        <!-- Keep tulane-campus.jpg inside the images folder. -->
+        <img src="images/tulane-campus.jpg"
+          alt="Tulane University campus"
+          onerror="this.onerror=null;this.src='tulane-campus.jpg';">
+      </div>
+    </header>
+
+    <main class="content">
+
+      <section class="page active" id="home">
+        <div class="section-label">Welcome</div>
+        <h2>A little about my work</h2>
+        <p class="lead">
+          I am a Mathematics PhD student at Tulane University.
+          My academic background is in algebra and number theory,
+          with previous research focused on integer factorization
+          algorithms and their mathematical foundations.
+        </p>
+        <p>
+          Before joining Tulane, I completed an MS in Mathematics
+          at the Lahore University of Management Sciences (LUMS).
+          My master's thesis studied the Number Field Sieve and
+          included implementations of both the Number Field Sieve
+          and the Quadratic Sieve in Python and SageMath.
+        </p>
+
+        <h2 class="section-heading">At a glance</h2>
+        <div class="cards">
+          <article class="card">
+            <span class="date">AUGUST 2026</span>
+            <h3>PhD in Mathematics</h3>
+            <p>Started my doctoral studies at Tulane University.</p>
+          </article>
+          <article class="card">
+            <span class="date">RESEARCH</span>
+            <h3>Number Theory & Computation</h3>
+            <p>Exploring algebraic structures and computational methods.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="page" id="updates">
+        <div class="section-label">News and milestones</div>
+        <h2>Latest Updates</h2>
+        <p class="lead">
+          Recent milestones in my academic journey.
+        </p>
+
+        <div class="entry">
+          <span class="date">19 AUGUST 2026</span>
+          <h3>Passed the Algebra and Topology Qualifying Exams</h3>
+          <p>
+            Passed both the Algebra and Topology qualifying
+            examinations during my first week of the Mathematics PhD.
+          </p>
+        </div>
+
+        <div class="entry">
+          <span class="date">17 AUGUST 2026</span>
+          <h3>Started my PhD at Tulane University</h3>
           <p>
             Began the PhD program in Mathematics at Tulane
             University in New Orleans, Louisiana.
           </p>
-        </article>
+        </div>
+      </section>
 
-        <article class="card">
-          <span class="date">19 August 2026</span>
-          <h3>Passed both qualifying examinations</h3>
+      <section class="page" id="about">
+        <div class="section-label">Background</div>
+        <h2>About Me</h2>
+        <p class="lead">
+          I am a mathematician from Pakistan pursuing a PhD in
+          Mathematics at Tulane University.
+        </p>
+        <p>
+          I previously completed an MS in Mathematics at LUMS
+          through the International Mathematics Master Fellowship.
+          Before that, I earned an MSc in Mathematics from the
+          University of the Punjab, where I received a gold medal
+          for securing first position in my cohort with a CGPA
+          of 4.0/4.0.
+        </p>
+        <p>
+          My master's thesis, supervised by Professor Peter
+          Stevenhagen, focused on the Number Field Sieve. It
+          combined the theoretical ideas behind integer
+          factorization with practical implementations in Python
+          and SageMath.
+        </p>
+        <p>
+          Outside my research, I enjoy teaching mathematics and
+          explaining abstract concepts through lectures and
+          worked examples.
+        </p>
+      </section>
+
+      <section class="page" id="research">
+        <div class="section-label">Mathematical interests</div>
+        <h2>Research Interests</h2>
+        <p class="lead">
+          I am interested in algebraic and computational aspects
+          of mathematics, especially number-theoretic problems
+          that connect mathematical theory with algorithms.
+        </p>
+
+        <div class="tags">
+          <span class="tag">Number Theory</span>
+          <span class="tag">Algebra</span>
+          <span class="tag">Computational Number Theory</span>
+          <span class="tag">Elliptic Curves</span>
+          <span class="tag">Algebraic Geometry</span>
+          <span class="tag">Algebraic Coding Theory</span>
+          <span class="tag">Cryptography</span>
+        </div>
+
+        <div class="entry">
+          <h3>Master's Thesis: The Number Field Sieve</h3>
+          <div class="meta">September 2024 – May 2025 · Advisor: Professor Peter Stevenhagen</div>
           <p>
-            Passed the Algebra and Topology qualifying
-            examinations during my first week of the PhD.
+            Studied the theoretical foundations of the Number
+            Field Sieve, including polynomial selection, sieving
+            over the integers and number rings, the collection
+            of smooth relations, the linear algebra phase, and
+            the final square-root computation.
           </p>
-        </article>
-      </div>
-    </section>
-
-    <section id="about">
-      <div class="section-label">A little about me</div>
-      <h2>About Me</h2>
-
-      <p class="intro">
-        I am a Mathematics PhD student at Tulane University.
-        Before joining Tulane, I completed an MS in Mathematics
-        at the Lahore University of Management Sciences (LUMS)
-        through the International Mathematics Master Fellowship.
-        My previous studies also include an MSc in Mathematics
-        from the University of the Punjab, where I graduated
-        with a perfect CGPA of 4.0/4.0 and received a gold medal.
-      </p>
-
-      <p class="intro">
-        My master's thesis focused on the Number Field Sieve
-        for integer factorization. This work brought together
-        algebraic number theory, algorithmic ideas, and
-        implementations in Python and SageMath.
-      </p>
-    </section>
-
-    <section id="research">
-      <div class="section-label">Mathematical interests</div>
-      <h2>Research Interests</h2>
-
-      <p class="intro">
-        I am interested in algebraic and computational aspects
-        of mathematics, particularly problems connecting
-        number theory with algorithms.
-      </p>
-
-      <div class="tags">
-        <span class="tag">Number Theory</span>
-        <span class="tag">Algebra</span>
-        <span class="tag">Computational Number Theory</span>
-        <span class="tag">Elliptic Curves</span>
-        <span class="tag">Algebraic Geometry</span>
-        <span class="tag">Algebraic Coding Theory</span>
-        <span class="tag">Cryptography</span>
-      </div>
-
-      <div class="entry">
-        <h3>The Number Field Sieve</h3>
-        <div class="details">
-          Master's thesis · September 2024 – May 2025
+          <p>
+            Implemented both the Number Field Sieve and the
+            Quadratic Sieve in Python and SageMath and used
+            them to factor integers.
+          </p>
         </div>
-        <p>
-          Advisor: Professor Peter Stevenhagen.
-        </p>
-        <p>
-          Studied the theoretical foundations and major stages
-          of the Number Field Sieve, including polynomial
-          selection, sieving over the integers and number rings,
-          linear algebra, and the final square-root computation.
-          I also implemented the Number Field Sieve and the
-          Quadratic Sieve using Python and SageMath.
-        </p>
-      </div>
-    </section>
+      </section>
 
-    <section id="education">
-      <div class="section-label">Academic background</div>
-      <h2>Education</h2>
+      <section class="page" id="education">
+        <div class="section-label">Academic history</div>
+        <h2>Education</h2>
 
-      <div class="entry">
-        <h3>PhD in Mathematics</h3>
-        <div class="details">
-          Tulane University · New Orleans, USA · August 2026 – Present
+        <div class="entry">
+          <h3>PhD in Mathematics</h3>
+          <div class="meta">Tulane University, New Orleans, USA · August 2026 – Present</div>
+          <p>
+            Started on 17 August 2026. Passed the Algebra and
+            Topology qualifying examinations on 19 August 2026.
+          </p>
         </div>
-        <p>
-          Started on 17 August 2026. Passed the Algebra and
-          Topology qualifying examinations on 19 August 2026.
-        </p>
-      </div>
 
-      <div class="entry">
-        <h3>MS in Mathematics</h3>
-        <div class="details">
-          Lahore University of Management Sciences (LUMS), Pakistan
-          · September 2023 – May 2025
+        <div class="entry">
+          <h3>MS in Mathematics</h3>
+          <div class="meta">Lahore University of Management Sciences, Pakistan · September 2023 – May 2025</div>
+          <p>CGPA: 3.46/4.0.</p>
+          <p>
+            Coursework included advanced algebra, advanced
+            differential geometry, advanced topology, advanced
+            complex analysis, numerical linear algebra and
+            analysis, and probability and statistical analysis.
+          </p>
         </div>
-        <p>CGPA: 3.46/4.0.</p>
-        <p>
-          Coursework included advanced algebra, topology,
-          differential geometry, complex analysis, numerical
-          linear algebra and analysis, and probability.
-        </p>
-      </div>
 
-      <div class="entry">
-        <h3>MSc in Mathematics</h3>
-        <div class="details">
-          University of the Punjab, Pakistan · December 2020 – August 2022
+        <div class="entry">
+          <h3>MSc in Mathematics</h3>
+          <div class="meta">University of the Punjab, Pakistan · December 2020 – August 2022</div>
+          <p>CGPA: 4.0/4.0.</p>
+          <p>
+            Coursework included real analysis, advanced group
+            theory, topology, measure theory, complex analysis,
+            numerical analysis, set theory, and statistics.
+          </p>
+          <p>Gold medalist for achieving first position in a cohort of 120 students.</p>
         </div>
-        <p>
-          CGPA: 4.0/4.0. Gold medalist for securing first
-          position in a cohort of 120 students.
-        </p>
-      </div>
 
-      <div class="entry">
-        <h3>BSc in Mathematics</h3>
-        <div class="details">
-          The Islamia University of Bahawalpur, Pakistan
-          · September 2018 – November 2020
+        <div class="entry">
+          <h3>BSc in Mathematics</h3>
+          <div class="meta">The Islamia University of Bahawalpur, Pakistan · September 2018 – November 2020</div>
+          <p>Percentage: 77.75%.</p>
         </div>
-        <p>Percentage: 77.75%.</p>
-      </div>
-    </section>
+      </section>
 
-    <section id="teaching">
-      <div class="section-label">Teaching and communication</div>
-      <h2>Teaching Experience</h2>
+      <section class="page" id="teaching">
+        <div class="section-label">Teaching and communication</div>
+        <h2>Teaching Experience</h2>
 
-      <div class="entry">
-        <h3>Graduate Teaching Assistant — Calculus I</h3>
-        <div class="details">
-          LUMS, Pakistan · January 2024 – May 2024
+        <div class="entry">
+          <h3>Graduate Teaching Assistant — Calculus I</h3>
+          <div class="meta">LUMS, Pakistan · January 2024 – May 2024</div>
+          <p>
+            Conducted weekly tutorials to clarify course concepts,
+            held office hours, proctored exams, assisted with grading,
+            and responded to students' grading questions.
+          </p>
         </div>
-        <p>
-          Conducted weekly tutorials, held office hours,
-          proctored examinations, assisted with grading,
-          and supported students with course questions.
-        </p>
-      </div>
 
-      <div class="entry">
-        <h3>Mathematics Instructor</h3>
-        <div class="details">2021 – 2023</div>
-        <p>
-          Created mathematics lectures for my YouTube channel,
-          <a href="https://www.youtube.com/@puremathswithusama19"
-             target="_blank" rel="noopener">Pure Maths with Usama</a>.
-          Since 2022, I have also taught mathematics online,
-          including group theory, representation theory,
-          number theory, calculus, ring theory, field extensions,
-          and finite fields.
-        </p>
-      </div>
-    </section>
-
-    <section id="experience">
-      <div class="section-label">Further academic activities</div>
-      <h2>Courses, Schools and Awards</h2>
-
-      <div class="entry">
-        <h3>CIMPA School on Arithmetic in Action</h3>
-        <div class="details">
-          Universitas Gadjah Mada, Indonesia · July 2025
+        <div class="entry">
+          <h3>Mathematics Instructor</h3>
+          <div class="meta">2021 – 2023 · Online teaching and YouTube</div>
+          <p>
+            Created lectures for my YouTube channel,
+            <a href="https://www.youtube.com/@puremathswithusama19"
+              target="_blank" rel="noopener">Pure Maths with Usama</a>.
+            Since 2022, I have also taught mathematics online
+            through Zoom.
+          </p>
+          <p>
+            Subjects include group theory, advanced group theory,
+            representation and characters of groups, number theory,
+            calculus, ring theory, field extensions, and finite fields.
+          </p>
         </div>
-        <p>
-          Participated in courses on algebraic number theory,
-          elliptic curves, modular forms, cryptography, and
-          coding theory.
-        </p>
-      </div>
+      </section>
 
-      <div class="entry">
-        <h3>CIMPA School on Applied Number Theory</h3>
-        <div class="details">
-          Ho Chi Minh City University of Education, Vietnam · June 2024
+      <section class="page" id="experience">
+        <div class="section-label">Academic activities</div>
+        <h2>Schools, Courses & Awards</h2>
+
+        <div class="entry">
+          <h3>CIMPA School on Arithmetic in Action</h3>
+          <div class="meta">Universitas Gadjah Mada, Indonesia · 14–25 July 2025</div>
+          <p>
+            Participated in courses on algebraic number theory,
+            elliptic curves, modular forms, cryptography,
+            and coding theory.
+          </p>
         </div>
-        <p>
-          Studied topics in algebraic number theory, elliptic
-          curves, cryptography, and algebraic coding theory.
-        </p>
-      </div>
 
-      <div class="entry">
-        <h3>CIMPA Research School on Algebra and Algebraic Geometry</h3>
-        <div class="details">
-          LUMS, Pakistan · February – March 2024
+        <div class="entry">
+          <h3>Finite Rings and their Applications in Coding Theory</h3>
+          <div class="meta">CIMPA Hybrid Course · 2–5 June 2025</div>
+          <p>Instructor: Dr. Alexandre Fotue Tabue.</p>
         </div>
-        <p>
-          Participated in courses on commutative algebra,
-          algebraic and arithmetic geometry, representation
-          theory, and combinatorics.
-        </p>
-      </div>
 
-      <div class="entry">
-        <h3>International Mathematics Master Fellowship</h3>
-        <div class="details">LUMS · September 2023 – May 2025</div>
-        <p>
-          Received a fully funded scholarship for the MS
-          in Mathematics under the IMM program.
-        </p>
-      </div>
-
-      <div class="entry">
-        <h3>Gold Medal — MSc Mathematics</h3>
-        <div class="details">
-          University of the Punjab · January 2024
+        <div class="entry">
+          <h3>CIMPA School on Applied Number Theory</h3>
+          <div class="meta">Ho Chi Minh City University of Education, Vietnam · 3–14 June 2024</div>
+          <p>
+            Studied algebraic number theory, elliptic curves,
+            cryptography, and algebraic coding theory.
+          </p>
         </div>
-        <p>
-          Awarded for achieving first position with a
-          CGPA of 4.0/4.0.
+
+        <div class="entry">
+          <h3>CIMPA Research School on Algebra and Algebraic Geometry for Applications</h3>
+          <div class="meta">LUMS, Pakistan · 26 February – 8 March 2024</div>
+          <p>
+            Participated in courses on commutative algebra,
+            algebraic and arithmetic geometry, representation
+            theory, and combinatorics.
+          </p>
+        </div>
+
+        <div class="entry">
+          <h3>International Mathematics Master Fellowship</h3>
+          <div class="meta">LUMS · September 2023 – May 2025</div>
+          <p>Received a fully funded scholarship for the MS in Mathematics.</p>
+        </div>
+
+        <div class="entry">
+          <h3>Gold Medal — MSc Mathematics</h3>
+          <div class="meta">University of the Punjab · 20 January 2024</div>
+          <p>
+            Awarded for securing first position in a cohort
+            of 120 students with a CGPA of 4.0/4.0.
+          </p>
+        </div>
+
+        <div class="entry">
+          <h3>Graduate Poster Presentation</h3>
+          <div class="meta">LUMS · 30 January 2025</div>
+          <p>Poster title: RSA and Integer Factorization Algorithms.</p>
+        </div>
+
+        <div class="entry">
+          <h3>TA Professional Development Course</h3>
+          <div class="meta">LUMS · 2024</div>
+        </div>
+
+        <div class="entry">
+          <h3>LUMS Math Circles — Volunteer</h3>
+          <div class="meta">September 2023 – May 2025</div>
+          <p>
+            Facilitated interactive exercises and discussions
+            to help school students develop mathematical
+            problem-solving skills.
+          </p>
+        </div>
+
+        <h2 class="section-heading">Technical Skills</h2>
+        <div class="tags">
+          <span class="tag">SageMath</span>
+          <span class="tag">PARI/GP</span>
+          <span class="tag">Python</span>
+          <span class="tag">LaTeX</span>
+        </div>
+
+        <p><strong>Languages:</strong> Urdu and English.</p>
+
+        <h2 class="section-heading">Conference Participation</h2>
+        <div class="entry">
+          <h3>International Conference on Mathematical Modelling and Scientific Computing for Industrial Research</h3>
+          <div class="meta">Abdus Salam School of Mathematical Sciences, Lahore · 7–8 November 2022</div>
+        </div>
+      </section>
+
+      <section class="page" id="contact">
+        <div class="section-label">Correspondence</div>
+        <h2>Contact</h2>
+        <p class="lead">
+          Please feel free to get in touch about mathematics,
+          academic topics, or related research interests.
         </p>
-      </div>
 
-      <div class="entry">
-        <h3>Graduate Poster Presentation</h3>
-        <div class="details">LUMS · 30 January 2025</div>
-        <p>Poster title: RSA and Integer Factorization Algorithms.</p>
-      </div>
+        <div class="contact-box">
+          <h3>Email</h3>
+          <p><a href="mailto:musama1@tulane.edu">musama1@tulane.edu</a></p>
 
-      <div class="entry">
-        <h3>Additional Academic Activities</h3>
-        <p>
-          Completed the CIMPA hybrid course
-          <em>Finite Rings and their Applications in Coding Theory</em>
-          in June 2025 and the TA Professional Development
-          Course at LUMS in 2024.
-        </p>
-        <p>
-          Volunteered with LUMS Math Circles, helping school
-          students develop mathematical problem-solving skills.
-        </p>
-      </div>
-    </section>
+          <h3>GitHub</h3>
+          <p><a href="https://github.com/Usama314"
+            target="_blank" rel="noopener">github.com/Usama314</a></p>
 
-    <section id="skills">
-      <div class="section-label">Tools and languages</div>
-      <h2>Skills</h2>
+          <h3>YouTube</h3>
+          <p><a href="https://www.youtube.com/@puremathswithusama19"
+            target="_blank" rel="noopener">Pure Maths with Usama</a></p>
 
-      <p><strong>Mathematical software:</strong>
-        SageMath, PARI/GP</p>
-      <p><strong>Programming:</strong> Python</p>
-      <p><strong>Typesetting:</strong> LaTeX</p>
-      <p><strong>Languages:</strong> Urdu and English</p>
-    </section>
+          <h3>LinkedIn</h3>
+          <p>Search for Muhammad Usama on LinkedIn.</p>
+        </div>
+      </section>
 
-    <section id="contact">
-      <div class="section-label">Contact</div>
-      <h2>Get in Touch</h2>
+    </main>
 
-      <div class="contact-box">
-        <p>
-          I welcome academic correspondence about mathematics,
-          research, and related topics.
-        </p>
-        <p>
-          <strong>Email:</strong>
-          <a href="mailto:musama1@tulane.edu">musama1@tulane.edu</a>
-        </p>
-        <p>
-          <strong>YouTube:</strong>
-          <a href="https://www.youtube.com/@puremathswithusama19"
-             target="_blank" rel="noopener">Pure Maths with Usama</a>
-        </p>
-        <p>
-          <strong>LinkedIn:</strong> Search for Muhammad Usama
-          on LinkedIn to connect.
-        </p>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
-    <p>© <span id="year"></span> Muhammad Usama · Mathematics</p>
-    <p>Tulane University, New Orleans, Louisiana</p>
-  </footer>
+    <footer class="footer">
+      © <span id="year"></span> Muhammad Usama · Mathematics · Tulane University
+    </footer>
+  </div>
 
   <script>
-    const menuButton = document.getElementById("menuButton");
-    const navigation = document.getElementById("navigation");
+    const menuToggle = document.getElementById("menuToggle");
+    const navButtons = document.querySelectorAll(".nav button");
+    const pages = document.querySelectorAll(".page");
 
-    menuButton.addEventListener("click", () => {
-      const isOpen = navigation.classList.toggle("open");
-      menuButton.setAttribute("aria-expanded", String(isOpen));
-      menuButton.setAttribute(
+    // Start with the sidebar visible.
+    // The button collapses it on desktop and toggles it on mobile.
+    menuToggle.addEventListener("click", () => {
+      const collapsed = document.body.classList.toggle("menu-collapsed");
+      menuToggle.setAttribute("aria-expanded", String(!collapsed));
+      menuToggle.setAttribute(
         "aria-label",
-        isOpen ? "Close navigation menu" : "Open navigation menu"
+        collapsed ? "Open navigation" : "Collapse navigation"
       );
-      menuButton.textContent = isOpen ? "×" : "☰";
     });
 
-    navigation.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", () => {
-        navigation.classList.remove("open");
-        menuButton.setAttribute("aria-expanded", "false");
-        menuButton.setAttribute("aria-label", "Open navigation menu");
-        menuButton.textContent = "☰";
+    navButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        const target = button.dataset.page;
+
+        navButtons.forEach(item => item.classList.remove("active"));
+        button.classList.add("active");
+
+        pages.forEach(page => {
+          page.classList.toggle("active", page.id === target);
+        });
+
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+        if (window.innerWidth <= 850) {
+          document.body.classList.add("menu-collapsed");
+          menuToggle.setAttribute("aria-expanded", "false");
+          menuToggle.setAttribute("aria-label", "Open navigation");
+        }
       });
     });
 
     document.getElementById("year").textContent =
       new Date().getFullYear();
   </script>
-
 </body>
 </html>
