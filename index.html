@@ -1,2 +1,280 @@
-<h1>My Portfolio</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Usama | Academic CV</title>
+    
+    <!-- Google Fonts for sleek academic typography -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- MathJax Configuration and Script for rendering LaTeX math formulas -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://jsdelivr.net"></script>
+
+    <style>
+        :root {
+            --bg-color: #fcfcfc;
+            --text-color: #222222;
+            --accent-color: #1e3a8a; /* Deep Academic Blue */
+            --border-color: #e5e7eb;
+            --light-text: #555555;
+            --code-bg: #f3f4f6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        header {
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .contact-info span::after {
+            content: " |";
+            margin-left: 1rem;
+        }
+
+        .contact-info span:last-child::after {
+            content: "";
+        }
+
+        section {
+            margin-bottom: 2.5rem;
+        }
+
+        h2 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.3rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #333333;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            margin-bottom: 0.8rem;
+            position: relative;
+        }
+
+        .cv-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .cv-details {
+            flex: 1;
+        }
+
+        .cv-date {
+            font-size: 0.9rem;
+            color: var(--light-text);
+            font-weight: 500;
+            margin-left: 1.5rem;
+            white-space: nowrap;
+        }
+
+        .item-title {
+            font-weight: 600;
+            color: #111111;
+        }
+
+        .item-subtitle {
+            font-style: italic;
+            color: var(--light-text);
+        }
+
+        code, pre {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--code-bg);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        pre {
+            display: block;
+            padding: 1rem;
+            overflow-x: auto;
+            margin-top: 0.5rem;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 1rem 0; }
+            .container { padding: 1.5rem; border-radius: 0; box-shadow: none; }
+            .cv-item { flex-direction: column; }
+            .cv-date { margin-left: 0; margin-top: 0.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header>
+            <h1>Muhammad Usama</h1>
+            <div class="contact-info">
+                <span>PhD Student in Mathematics</span>
+                <span>Tulane University</span>
+                <span>Email: <a href="mailto:musama@tulane.edu">musama@tulane.edu</a></span>
+                <span>Website: <a href="https://github.io">Usama314.github.io</a></span>
+            </div>
+        </header>
+
+        <!-- About Me Section -->
+        <section id="about">
+            <h2>About Me</h2>
+            <p>
+                I am a first-year PhD student in the Department of Mathematics at <strong>Tulane University</strong>. 
+                My core academic interests lie within pure mathematics with heavy computational aspects. I am broadly interested in arithmetic geometry and structural properties of algebraic entities.
+            </p>
+        </section>
+
+        <!-- Research Interests Section -->
+        <section id="research">
+            <h2>Research Interests</h2>
+            <p>
+                My research focuses primarily on <strong>Elliptic Curves</strong> and their properties over finite fields $\mathbb{F}_q$. 
+                I am particularly interested in computational methods, counting rational points, and exploring the explicit structure of algebraic structures such as the endomorphism ring $\text{End}(E)$ of a given curve $E/\mathbb{F}_q$.
+            </p>
+            <p>
+                For example, given an elliptic curve defined by a short Weierstrass equation:
+                $$y^2 = x^3 + ax + b$$
+                I investigate computational constraints related to the group structure of $E(\mathbb{F}_q)$ and its associated trace of Frobenius $t$, satisfying the Hasse bound $|t| \le 2\sqrt{q}$.
+            </p>
+        </section>
+
+        <!-- Conferences & Talks Section -->
+        <section id="talks">
+            <h2>Conferences & Talks</h2>
+            <ul>
+                <li class="cv-item">
+                    <div class="cv-details">
+                        <span class="item-title">Title of Your Presentation or Poster</span><br>
+                        <span class="item-subtitle">Name of Seminar / Conference, Institution Location</span>
+                    </div>
+                    <div class="cv-date">Month Year</div>
+                </li>
+                <li class="cv-item">
+                    <div class="cv-details">
+                        <span class="item-title">Attended: CIMPA Research School</span><br>
+                        <span class="item-subtitle">Mathematical Topics in Context, Venue Location</span>
+                    </div>
+                    <div class="cv-date">Year</div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Teaching Experience Section -->
+        <section id="teaching">
+            <h2>Teaching Experience</h2>
+            <ul>
+                <li class="cv-item">
+                    <div class="cv-details">
+                        <span class="item-title">Graduate Teaching Assistant</span><br>
+                        <span class="item-subtitle">Department of Mathematics, Tulane University</span>
+                        <p style="font-size: 0.9rem; margin-top: 0.3rem; color: var(--light-text);">
+                            Responsible for leading recitation sections, grading coursework, holding office hours, and assisting students with fundamental algebraic and geometric concepts.
+                        </p>
+                    </div>
+                    <div class="cv-date">Fall 2026 - Present</div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Computation & Codes Section -->
+        <section id="codes">
+            <h2>Computational Codes & Projects</h2>
+            <ul>
+                <li>
+                    <span class="item-title">SageMath Tools for Elliptic Curves</span>
+                    <p style="font-size: 0.9rem; margin-top: 0.3rem;">
+                        Developed custom algorithms in SageMath to analyze structural components of non-singular plane cubic curves. 
+                        Includes computing invariants, finding point groups, and tracking explicit arithmetic properties over finite fields.
+                    </p>
+                    <pre># Example snippet for calculating curve cardinality
+E = EllipticCurve(GF(q), [a, b])
+print("Total number of points:", E.cardinality())</pre>
+                </li>
+            </ul>
+        </section>
+
+    </div>
+
+</body>
+</html>
+
 
