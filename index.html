@@ -1,278 +1,462 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammad Usama | Academic CV</title>
-    
-    <!-- Google Fonts for sleek academic typography -->
-    <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- MathJax Configuration and Script for rendering LaTeX math formulas -->
-    <script>
-        window.MathJax = {
-            tex: {
-                inlineMath: [['$', '$'], ['\\(', '\\)']],
-                displayMath: [['$$', '$$'], ['\\[', '\\]']],
-                processEscapes: true
-            },
-            svg: {
-                fontCache: 'global'
-            }
-        };
-    </script>
-    <script id="MathJax-script" async src="https://jsdelivr.net"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muhammad Usama | Mathematics</title>
 
-    <style>
-        :root {
-            --bg-color: #fcfcfc;
-            --text-color: #222222;
-            --accent-color: #1e3a8a; /* Deep Academic Blue */
-            --border-color: #e5e7eb;
-            --light-text: #555555;
-            --code-bg: #f3f4f6;
-        }
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+  <style>
+    :root {
+      --blue: #1e3a8a;
+      --text: #222;
+      --muted: #666;
+      --border: #e5e7eb;
+      --bg: #fcfcfc;
+    }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            padding: 2rem 1rem;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 3rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.8;
+    }
 
-        header {
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 1.5rem;
-            margin-bottom: 2.5rem;
-        }
+    header {
+      max-width: 1000px;
+      margin: auto;
+      padding: 28px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
 
-        h1 {
-            font-family: 'Crimson Pro', serif;
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: var(--accent-color);
-            margin-bottom: 0.5rem;
-        }
+    .brand {
+      color: var(--blue);
+      font: 600 30px 'Crimson Pro', serif;
+    }
 
-        .contact-info {
-            font-size: 0.9rem;
-            color: var(--light-text);
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
+    .subtitle {
+      color: var(--muted);
+      font-size: 13px;
+    }
 
-        .contact-info span::after {
-            content: " |";
-            margin-left: 1rem;
-        }
+    /* Three-line menu button */
+    .menu-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+    }
 
-        .contact-info span:last-child::after {
-            content: "";
-        }
+    .menu-button span {
+      display: block;
+      width: 27px;
+      height: 2px;
+      background: var(--blue);
+      transition: 0.25s;
+    }
 
-        section {
-            margin-bottom: 2.5rem;
-        }
+    .menu-button[aria-expanded="true"] span:first-child {
+      transform: translateY(8px) rotate(45deg);
+    }
 
-        h2 {
-            font-family: 'Crimson Pro', serif;
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: var(--accent-color);
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.3rem;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
+    .menu-button[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
 
-        p {
-            margin-bottom: 1rem;
-            color: #333333;
-        }
+    .menu-button[aria-expanded="true"] span:last-child {
+      transform: translateY(-8px) rotate(-45deg);
+    }
 
-        ul {
-            list-style-type: none;
-        }
+    /* Dropdown navigation */
+    .navigation {
+      display: none;
+      max-width: 1000px;
+      margin: auto;
+      padding: 12px 24px;
+      border-bottom: 1px solid var(--border);
+      background: white;
+    }
 
-        li {
-            margin-bottom: 0.8rem;
-            position: relative;
-        }
+    .navigation.open {
+      display: flex;
+      flex-direction: column;
+    }
 
-        .cv-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 1rem;
-        }
+    .navigation button {
+      background: white;
+      color: var(--text);
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 15px 10px;
+      text-align: left;
+      font: 500 15px 'Inter', sans-serif;
+      cursor: pointer;
+    }
 
-        .cv-details {
-            flex: 1;
-        }
+    .navigation button:hover,
+    .navigation button.active {
+      color: var(--blue);
+      background: #f5f7fc;
+    }
 
-        .cv-date {
-            font-size: 0.9rem;
-            color: var(--light-text);
-            font-weight: 500;
-            margin-left: 1.5rem;
-            white-space: nowrap;
-        }
+    main {
+      max-width: 850px;
+      margin: 65px auto;
+      padding: 0 25px;
+      min-height: 420px;
+    }
 
-        .item-title {
-            font-weight: 600;
-            color: #111111;
-        }
+    .page {
+      display: none;
+      animation: appear 0.25s ease;
+    }
 
-        .item-subtitle {
-            font-style: italic;
-            color: var(--light-text);
-        }
+    .page.active {
+      display: block;
+    }
 
-        code, pre {
-            font-family: 'Courier New', Courier, monospace;
-            background-color: var(--code-bg);
-            padding: 0.2rem 0.4rem;
-            border-radius: 4px;
-            font-size: 0.9rem;
-        }
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        pre {
-            display: block;
-            padding: 1rem;
-            overflow-x: auto;
-            margin-top: 0.5rem;
-        }
+    .eyebrow {
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
 
-        a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
+    h1, h2 {
+      font-family: 'Crimson Pro', serif;
+      color: var(--blue);
+      line-height: 1.25;
+    }
 
-        a:hover {
-            text-decoration: underline;
-        }
+    h1 { font-size: clamp(36px, 6vw, 54px); }
+    h2 { font-size: 32px; margin-bottom: 20px; }
 
-        @media (max-width: 600px) {
-            body { padding: 1rem 0; }
-            .container { padding: 1.5rem; border-radius: 0; box-shadow: none; }
-            .cv-item { flex-direction: column; }
-            .cv-date { margin-left: 0; margin-top: 0.2rem; }
-        }
-    </style>
+    p { margin: 16px 0; }
+
+    .card {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card h3 {
+      font-size: 17px;
+      margin-bottom: 5px;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    a:hover { text-decoration: underline; }
+
+    footer {
+      max-width: 1000px;
+      margin: auto;
+      padding: 25px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+      header { padding: 20px; }
+      .brand { font-size: 25px; }
+      main { margin: 40px auto; }
+    }
+  </style>
 </head>
+
 <body>
 
-    <div class="container">
-        
-        <header>
-            <h1>Muhammad Usama</h1>
-            <div class="contact-info">
-                <span>PhD Student in Mathematics</span>
-                <span>Tulane University</span>
-                <span>Email: <a href="mailto:musama@tulane.edu">musama@tulane.edu</a></span>
-                <span>Website: <a href="https://github.io">Usama314.github.io</a></span>
-            </div>
-        </header>
+<header>
+  <div>
+    <div class="brand">Muhammad Usama</div>
+    <div class="subtitle">PhD Student in Mathematics · Tulane University</div>
+  </div>
 
-        <!-- About Me Section -->
-        <section id="about">
-            <h2>About Me</h2>
-            <p>
-                I am a first-year PhD student in the Department of Mathematics at <strong>Tulane University</strong>. 
-                My core academic interests lie within pure mathematics with heavy computational aspects. I am broadly interested in arithmetic geometry and structural properties of algebraic entities.
-            </p>
-        </section>
+  <button class="menu-button"
+          id="menuButton"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="navigation">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
 
-        <!-- Research Interests Section -->
-        <section id="research">
-            <h2>Research Interests</h2>
-            <p>
-                My research focuses primarily on <strong>Elliptic Curves</strong> and their properties over finite fields $\mathbb{F}_q$. 
-                I am particularly interested in computational methods, counting rational points, and exploring the explicit structure of algebraic structures such as the endomorphism ring $\text{End}(E)$ of a given curve $E/\mathbb{F}_q$.
-            </p>
-            <p>
-                For example, given an elliptic curve defined by a short Weierstrass equation:
-                $$y^2 = x^3 + ax + b$$
-                I investigate computational constraints related to the group structure of $E(\mathbb{F}_q)$ and its associated trace of Frobenius $t$, satisfying the Hasse bound $|t| \le 2\sqrt{q}$.
-            </p>
-        </section>
+<nav class="navigation" id="navigation" aria-label="Main navigation">
+  <button class="active" data-page="home">Home</button>
+  <button data-page="about">About Me</button>
+  <button data-page="research">Research Interests</button>
+  <button data-page="education">Education</button>
+  <button data-page="teaching">Teaching</button>
+  <button data-page="projects">Computational Projects</button>
+  <button data-page="contact">Contact</button>
+</nav>
 
-        <!-- Conferences & Talks Section -->
-        <section id="talks">
-            <h2>Conferences & Talks</h2>
-            <ul>
-                <li class="cv-item">
-                    <div class="cv-details">
-                        <span class="item-title">Title of Your Presentation or Poster</span><br>
-                        <span class="item-subtitle">Name of Seminar / Conference, Institution Location</span>
-                    </div>
-                    <div class="cv-date">Month Year</div>
-                </li>
-                <li class="cv-item">
-                    <div class="cv-details">
-                        <span class="item-title">Attended: CIMPA Research School</span><br>
-                        <span class="item-subtitle">Mathematical Topics in Context, Venue Location</span>
-                    </div>
-                    <div class="cv-date">Year</div>
-                </li>
-            </ul>
-        </section>
+<main>
 
-        <!-- Teaching Experience Section -->
-        <section id="teaching">
-            <h2>Teaching Experience</h2>
-            <ul>
-                <li class="cv-item">
-                    <div class="cv-details">
-                        <span class="item-title">Graduate Teaching Assistant</span><br>
-                        <span class="item-subtitle">Department of Mathematics, Tulane University</span>
-                        <p style="font-size: 0.9rem; margin-top: 0.3rem; color: var(--light-text);">
-                            Responsible for leading recitation sections, grading coursework, holding office hours, and assisting students with fundamental algebraic and geometric concepts.
-                        </p>
-                    </div>
-                    <div class="cv-date">Fall 2026 - Present</div>
-                </li>
-            </ul>
-        </section>
+  <!-- HOME -->
+  <section class="page active" id="home">
+    <div class="eyebrow">Welcome to my academic website</div>
+    <h1>Pure Mathematics & Computation</h1>
+    <p>
+      I am a first-year PhD student in Mathematics at Tulane University.
+      My interests lie in pure mathematics, particularly algebraic and
+      computational approaches to number theory.
+    </p>
+    <p>
+      I am interested in elliptic curves, finite fields, algebraic number
+      theory, and algorithms arising from mathematical structures.
+    </p>
+    <p class="muted">
+      Use the three-line menu above to explore my academic background,
+      research interests, teaching, and computational projects.
+    </p>
+  </section>
 
-        <!-- Computation & Codes Section -->
-        <section id="codes">
-            <h2>Computational Codes & Projects</h2>
-            <ul>
-                <li>
-                    <span class="item-title">SageMath Tools for Elliptic Curves</span>
-                    <p style="font-size: 0.9rem; margin-top: 0.3rem;">
-                        Developed custom algorithms in SageMath to analyze structural components of non-singular plane cubic curves. 
-                        Includes computing invariants, finding point groups, and tracking explicit arithmetic properties over finite fields.
-                    </p>
-                    <pre># Example snippet for calculating curve cardinality
-E = EllipticCurve(GF(q), [a, b])
-print("Total number of points:", E.cardinality())</pre>
-                </li>
-            </ul>
-        </section>
+  <!-- ABOUT -->
+  <section class="page" id="about">
+    <div class="eyebrow">Biography</div>
+    <h2>About Me</h2>
+    <p>
+      I am a mathematics PhD student at Tulane University in New Orleans,
+      Louisiana. My mathematical interests combine abstract algebra with
+      explicit computation.
+    </p>
+    <p>
+      Before beginning my PhD, I completed an MS in Mathematics at
+      Lahore University of Management Sciences (LUMS), where my thesis
+      concerned integer factorization algorithms.
+    </p>
+    <p>
+      I enjoy exploring mathematical ideas through proofs, computational
+      experiments, and implementations in SageMath and Python.
+    </p>
+  </section>
 
+  <!-- RESEARCH -->
+  <section class="page" id="research">
+    <div class="eyebrow">Mathematical interests</div>
+    <h2>Research Interests</h2>
+
+    <div class="card">
+      <h3>Elliptic Curves over Finite Fields</h3>
+      <p>
+        Studying elliptic curves over finite fields, rational point
+        counts, Frobenius traces, isogeny classes, and endomorphism rings.
+      </p>
     </div>
+
+    <div class="card">
+      <h3>Computational Number Theory</h3>
+      <p>
+        Investigating algorithms for arithmetic problems, explicit
+        computations in number fields, and computational techniques
+        that support theoretical research.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Algebraic Number Theory</h3>
+      <p>
+        Exploring number fields, rings of integers, ideal class groups,
+        and class numbers.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Related Interests</h3>
+      <p>
+        Galois theory, Galois representations, modular forms,
+        and elliptic-curve cryptography.
+      </p>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="page" id="education">
+    <div class="eyebrow">Academic background</div>
+    <h2>Education</h2>
+
+    <div class="card">
+      <h3>PhD in Mathematics</h3>
+      <p class="muted">Tulane University · Fall 2026–Present</p>
+      <p>Graduate studies in pure mathematics.</p>
+    </div>
+
+    <div class="card">
+      <h3>MS in Mathematics</h3>
+      <p class="muted">
+        Lahore University of Management Sciences (LUMS)
+      </p>
+      <p>
+        Thesis on integer factorization using the Number Field Sieve
+        and Quadratic Sieve algorithms.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>MSc in Mathematics</h3>
+      <p class="muted">University of the Punjab</p>
+      <p>Academic background in mathematics.</p>
+    </div>
+  </section>
+
+  <!-- TEACHING -->
+  <section class="page" id="teaching">
+    <div class="eyebrow">Teaching experience</div>
+    <h2>Teaching</h2>
+
+    <div class="card">
+      <h3>Graduate Teaching Assistant</h3>
+      <p class="muted">
+        Department of Mathematics, Tulane University · Fall 2026–Present
+      </p>
+      <p>
+        Leading Calculus I recitation sections, grading assignments,
+        holding office hours, and helping students develop mathematical
+        reasoning and problem-solving skills.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Mathematics Teaching</h3>
+      <p>
+        Previous experience teaching mathematics online and creating
+        educational material in group theory and advanced group theory.
+      </p>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="page" id="projects">
+    <div class="eyebrow">Research through computation</div>
+    <h2>Computational Projects</h2>
+
+    <div class="card">
+      <h3>Integer Factorization Algorithms</h3>
+      <p>
+        Implementations of the Number Field Sieve and Quadratic Sieve
+        using Python and SageMath.
+      </p>
+      <p>
+        <a href="https://github.com/Usama314/Integer-factorization-using-Number-Field-Sieve-and-Quadratic-Sieve-"
+           target="_blank" rel="noopener noreferrer">
+          View project on GitHub →
+        </a>
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Elliptic Curves in SageMath</h3>
+      <p>
+        Computational experiments involving point counts over finite
+        fields, Frobenius traces, j-invariants, and isogeny classes.
+      </p>
+      <pre><code>E = EllipticCurve(GF(7), [0, 1])
+print("Number of points:", E.cardinality())
+print("Trace of Frobenius:",
+      7 + 1 - E.cardinality())
+print("j-invariant:", E.j_invariant())</code></pre>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="page" id="contact">
+    <div class="eyebrow">Get in touch</div>
+    <h2>Contact</h2>
+    <p>
+      For mathematical discussions, academic inquiries, or collaboration,
+      please feel free to contact me.
+    </p>
+    <p>
+      <strong>Email:</strong>
+      <a href="mailto:musama@tulane.edu">musama@tulane.edu</a>
+    </p>
+    <p>
+      <strong>GitHub:</strong>
+      <a href="https://github.com/Usama314"
+         target="_blank" rel="noopener noreferrer">
+        github.com/Usama314
+      </a>
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 Muhammad Usama · Academic Website
+</footer>
+
+<script>
+  const menuButton = document.getElementById('menuButton');
+  const navigation = document.getElementById('navigation');
+  const menuItems = document.querySelectorAll('.navigation button');
+  const pages = document.querySelectorAll('.page');
+
+  // Open and close the three-line menu.
+  menuButton.addEventListener('click', () => {
+    const isOpen = navigation.classList.toggle('open');
+    menuButton.setAttribute('aria-expanded', String(isOpen));
+    menuButton.setAttribute(
+      'aria-label',
+      isOpen ? 'Close navigation menu' : 'Open navigation menu'
+    );
+  });
+
+  // Display the selected page when a menu item is clicked.
+  menuItems.forEach(button => {
+    button.addEventListener('click', () => {
+      const pageId = button.dataset.page;
+
+      pages.forEach(page => {
+        page.classList.toggle('active', page.id === pageId);
+      });
+
+      menuItems.forEach(item => {
+        item.classList.toggle('active', item === button);
+      });
+
+      navigation.classList.remove('open');
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.setAttribute('aria-label', 'Open navigation menu');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
 
 </body>
 </html>
