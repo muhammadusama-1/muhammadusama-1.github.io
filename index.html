@@ -417,6 +417,7 @@
     @media (min-width: 851px) {
       body.menu-collapsed .sidebar { transform: translateX(-100%); }
     }
+    body:has(button:not([data-page="home"]).active) .hero { display: none; }
   </style>
 </head>
 <body>
